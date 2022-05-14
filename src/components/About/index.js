@@ -1,18 +1,19 @@
+// __tests__/About.test.js
 import React from "react";
-import coverImage from "../../assets/cover/cover-image.jpg";
+import { render, cleanup } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import About from "..";
 
-function About() {
-  return (
-    <section className="my-5">
-      <h1 id="about">Who am I?</h1>
-      <img
-        src={coverImage}
-        className="my-2"
-        style={{ width: "100%" }}
-        alt="cover"
-      />
-    </section>
-  );
-}
+afterEach(cleanup);
 
-export default About;
+describe("About component", () => {
+  it("renders", () => {
+    render(<About />);
+  });
+
+  it("matches snapshot", () => {
+    const { asFragment } = render(<About />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
